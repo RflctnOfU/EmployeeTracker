@@ -1,0 +1,26 @@
+{
+  "name": "employeetracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RflctnOfU/EmployeeTracker.git"
+  },
+  "author": "Kris Marshall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RflctnOfU/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/RflctnOfU/EmployeeTracker#readme",
+  "dependencies": {
+    "asciiart-logo": "^0.2.7",
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
+}
