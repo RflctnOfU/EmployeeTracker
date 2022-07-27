@@ -22,6 +22,10 @@ class Database {
         return this.connection.promise().query("SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS Employee, role.title AS Role, department.name AS Department FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id;");
     }
 
+    findEmployeesMngr() {
+        return this.connection.promise().query("SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS Employee,CONCAT(manager.first_name, ' ', manager.last_name) AS Manager FROM employee INNER JOIN employee manager ON employee.manager_id = manager.id")
+    }
+
     addDept(answer) {
         return this.connection.promise().query(`INSERT INTO department (name) VALUES ('${answer}')`)
     }

@@ -2,6 +2,7 @@ const { prompt } = require('inquirer');
 const art = require('asciiart-logo');
 require('console.table');
 const database = require('./db');
+const { end } = require('./db/connection');
 
 init();
 
@@ -175,6 +176,16 @@ function viewEmployeesDepartments() {
         .then(() => mainPrompts());
 }
 
+function viewEmployeesManager() {
+    database.findEmployeesMngr()
+        .then(([rows]) => {
+            let employeesMngr = rows;
+            console.log('\n');
+            console.table(employeesMngr);
+        })
+        .then(() => mainPrompts());
+}
+
 function addDepartment() {
     prompt([
         {
@@ -195,4 +206,13 @@ function addNewRole() {
     ]).then((answer) => {
         database.addRole(answer)
     }).then(() => mainPrompts());
+}
+
+
+
+function quit() {
+    const artText = art({ name: 'Thank You!' }).render();
+
+    console.log(artText);
+    process.exit();
 }
