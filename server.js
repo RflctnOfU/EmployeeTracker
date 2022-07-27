@@ -104,7 +104,7 @@ function mainPrompts() {
                 addDepartment();
                 break;
             case 'ADD_ROLE':
-                addRole();
+                addNewRole();
                 break;
             case 'ADD_EMPLOYEE':
                 addEmployee();
@@ -184,5 +184,15 @@ function addDepartment() {
         }
     ]).then((answer) => {
         database.addDept(answer.department)
+    }).then(() => mainPrompts());
+}
+
+function addNewRole() {
+    prompt([
+        {
+
+        }
+    ]).then((answer) => {
+        database.addRole(answer)
     }).then(() => mainPrompts());
 }
