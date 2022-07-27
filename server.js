@@ -2,8 +2,6 @@ const { prompt } = require('inquirer');
 const art = require('asciiart-logo');
 require('console.table');
 const database = require('./db');
-const { inherits } = require('util');
-const dataBase = new database;
 
 init();
 
@@ -138,19 +136,41 @@ function mainPrompts() {
 }
 
 function viewDepartments() {
-
+    database.findAllDepartments()
+        .then(([rows]) => {
+            let departments = rows;
+            console.log('\n');
+            console.table(departments);
+        })
+        .then(() => mainPrompts());
 }
 
 function viewRoles() {
-
+    database.findAllRoles()
+        .then(([rows]) => {
+            let roles = rows;
+            console.log('\n');
+            console.table(roles);
+        })
+        .then(() => mainPrompts());
 }
 
 function viewEmployees() {
-    dataBase.findAllEmployees()
+    database.findAllEmployees()
         .then(([rows]) => {
             let employees = rows;
             console.log('\n');
             console.table(employees);
+        })
+        .then(() => mainPrompts());
+}
+
+function viewEmployeesDepartments() {
+    database.findEmployeesByDept()
+        .then(([rows]) => {
+            let employeesDept = rows;
+            console.log('\n');
+            console.table(employeesDept);
         })
         .then(() => mainPrompts());
 }
