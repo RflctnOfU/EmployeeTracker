@@ -174,3 +174,15 @@ function viewEmployeesDepartments() {
         })
         .then(() => mainPrompts());
 }
+
+function addDepartment() {
+    prompt([
+        {
+            type: 'input',
+            name: 'department',
+            message: 'What department would you like to add?'
+        }
+    ]).then((answer) => {
+        database.addDept(answer.department)
+    }).then(() => mainPrompts());
+}
