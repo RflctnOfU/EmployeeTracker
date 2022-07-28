@@ -1,6 +1,7 @@
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)     
   # Employee Tracker
 
+  ![Screenshot](/assets/img/Screen%20Shot%202022-07-27%20at%2011.57.26%20PM.png)
   ---
   ## Description
 
@@ -59,4 +60,4 @@
 ---
   ## Link to Video Demonstration
 
-  
+  [Video Demonstration](https://drive.google.com/file/d/1wP5nx356JRdC5sPa8ICWKLzJJAOqV6W4/view)
