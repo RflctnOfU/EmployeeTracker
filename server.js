@@ -2,8 +2,7 @@ const { prompt } = require('inquirer');
 const art = require('asciiart-logo');
 require('console.table');
 const database = require('./db');
-const { end } = require('./db/connection');
-
+const connection = require('./db/connection');
 init();
 
 function init() {
@@ -50,33 +49,33 @@ function mainPrompts() {
                     value: 'ADD_ROLE'
                 },
                 {
-                    name: 'Update An Employee Role',
-                    value: 'UPDATE_EMPLOYEE_ROLE'
-                },
-                {
-                    name: 'Update An Employee Manager',
-                    value: 'UPDATE_EMPLOYEE_MANAGER'
-                },
-                {
                     name: 'Add An Employee',
                     value: 'ADD_EMPLOYEE'
                 },
                 {
-                    name: 'Remove An Employee',
-                    value: 'REMOVE_EMPLOYEE'
+                    name: 'Update An Employee Role',
+                    value: 'UPDATE_EMPLOYEE_ROLE'
                 },
-                {
-                    name: 'Remove A Department',
-                    value: 'REMOVE_DEPARTMENT'
-                },
-                {
-                    name: 'Remove A Role',
-                    value: 'REMOVE_ROLE'
-                },
-                {
-                    name: 'View Total Budget Of Department',
-                    value: 'VIEW_TOTAL_BUDGET'
-                },
+                // {
+                //     name: 'Update An Employee Manager',
+                //     value: 'UPDATE_EMPLOYEE_MANAGER'
+                // },
+                // {
+                //     name: 'Remove An Employee',
+                //     value: 'REMOVE_EMPLOYEE'
+                // },
+                // {
+                //     name: 'Remove A Department',
+                //     value: 'REMOVE_DEPARTMENT'
+                // },
+                // {
+                //     name: 'Remove A Role',
+                //     value: 'REMOVE_ROLE'
+                // },
+                // {
+                //     name: 'View Total Budget Of Department',
+                //     value: 'VIEW_TOTAL_BUDGET'
+                // },
                 {
                     name: 'Quit',
                     value: 'QUIT'
@@ -113,21 +112,21 @@ function mainPrompts() {
             case 'UPDATE_EMPLOYEE_ROLE':
                 updateEmployeeRole();
                 break;
-            case 'UPDATE_EMPLOYEE_MANAGER':
-                updateEmployeeManager();
-                break;
-            case 'REMOVE_EMPLOYEE':
-                removeEmployee();
-                break;
-            case 'REMOVE_DEPARTMENT':
-                removeDepartment();
-                break;
-            case 'REMOVE_ROLE':
-                removeRole();
-                break;
-            case 'VIEW_TOTAL_BUDGET':
-                viewTotalBudget();
-                break;
+            // case 'UPDATE_EMPLOYEE_MANAGER':
+            //     updateEmployeeManager();
+            //     break;
+            // case 'REMOVE_EMPLOYEE':
+            //     removeEmployee();
+            //     break;
+            // case 'REMOVE_DEPARTMENT':
+            //     removeDepartment();
+            //     break;
+            // case 'REMOVE_ROLE':
+            //     removeRole();
+            //     break;
+            // case 'VIEW_TOTAL_BUDGET':
+            //     viewTotalBudget();
+            //     break;
             case 'QUIT':
                 quit();
                 break;
@@ -199,13 +198,39 @@ function addDepartment() {
 }
 
 function addNewRole() {
-    prompt([
-        {
+    database.findAllDepartments()
+        .then(([rows]) => {
+            let departments = rows;
+            var deptChoices = departments.map(({ name }) => ({
+                name
+            }))
+            // return deptChoices;
+            prompt([
+                {
+                    type: 'input',
+                    name: 'role',
+                    message: 'What role do you want to add?'
+                },
+                {
+                    type: 'input',
+                    name: 'salary',
+                    message: 'What is the salary for this role?'
+                },
+                {
+                    type: 'list',
+                    name: 'department',
+                    message: 'In what department is this role?',
+                    choices: deptChoices
+                }
+            ]).then((answer) => {
+                database.addRole(answer)
+                    .then(() => mainPrompts())
+            })
+        })
+}
 
-        }
-    ]).then((answer) => {
-        database.addRole(answer)
-    }).then(() => mainPrompts());
+function addEmployee() {
+
 }
 
 
@@ -215,4 +240,4 @@ function quit() {
 
     console.log(artText);
     process.exit();
-}
+};
