@@ -4,7 +4,7 @@ require('console.table');
 const database = require('./db');
 const connection = require('./db/connection');
 init();
-
+//initializer
 function init() {
     const artText = art({ name: 'Employee Manager ' }).render();
 
@@ -82,7 +82,7 @@ function mainPrompts() {
                 }
             ]
         }
-    ]).then(res => {
+    ]).then(res => { // then function selector
         let choice = res.choice;
         switch (choice) {
             case 'VIEW_DEPARTMENTS':
@@ -134,7 +134,7 @@ function mainPrompts() {
     }
     )
 }
-
+// all of the functions...titles self explanitory
 function viewDepartments() {
     database.findAllDepartments()
         .then(([rows]) => {
@@ -265,7 +265,6 @@ function chooseManager() {
     database.findEmployeesMngr()
         .then(([rows]) => {
             let employeesMngr = rows;
-            console.log(employeesMngr);
             const managers = employeesMngr.map
                 (({ Manager }) => ({
                     name: Manager
@@ -370,7 +369,7 @@ function removeEmployee() {
 // }
 
 
-
+//quit function with ascii art
 function quit() {
     const artText = art({ name: 'Thank You!' }).render();
 

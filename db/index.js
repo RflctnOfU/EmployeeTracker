@@ -3,7 +3,7 @@ class Database {
     constructor(connection) {
         this.connection = connection;
     }
-
+    //methods for the Database Class
     findAllDepartments() {
         return this.connection.promise().query("SELECT department.name AS Department, department.id AS ID FROM department;");
     }
