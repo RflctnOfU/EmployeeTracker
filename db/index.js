@@ -31,8 +31,28 @@ class Database {
     }
 
     addRole(answer) {
-        return this.connection.promise().query(``)
+        return this.connection.promise().query(`INSERT INTO role (title, salary, department_id) VALUES ('${answer.role}', ${answer.salary}, ${answer.department})`)
     }
+
+    addNewEmpl(answer) {
+        return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id) VALUES ('${answer.firstName}', '${answer.lastName}', ${answer.role})`)
+    }
+
+    // addEmplMngr(answer) {
+    //     return this.connection.promise().query(`UPDATE employee SET manager_id = ${answer.manager} [WHERE manager_id = ''`)
+    // }
+
+    employeeRoleUpdate() {
+        return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id) VALUES ('${answer.firstName}', '${answer.lastName}', ${answer.role})`)
+    }
+
+    removeEmpl(answer) {
+        return this.connection.promise().query(`DELETE FROM employee WHERE employee.id = ${answer.employee}`)
+    }
+
+    // removeRole(answer) {
+    //     return this.connection.promise().query(`DELETE FROM role WHERE role.id = ${answer.role}`)
+    // }
 
 };
 
