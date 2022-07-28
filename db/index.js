@@ -50,9 +50,9 @@ class Database {
         return this.connection.promise().query(`DELETE FROM employee WHERE employee.id = ${answer.employee}`)
     }
 
-    // removeRole(answer) {
-    //     return this.connection.promise().query(`DELETE FROM role WHERE role.id = ${answer.role}`)
-    // }
+    removeRole(roleID) {
+        return this.connection.promise().query(`DELETE FROM role WHERE role.id`, roleID)
+    }
 
 };
 

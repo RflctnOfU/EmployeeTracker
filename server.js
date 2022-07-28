@@ -68,10 +68,10 @@ function mainPrompts() {
                 //     name: 'Remove A Department',
                 //     value: 'REMOVE_DEPARTMENT'
                 // },
-                // {
-                //     name: 'Remove A Role',
-                //     value: 'REMOVE_ROLE'
-                // },
+                {
+                    name: 'Remove A Role',
+                    value: 'REMOVE_ROLE'
+                },
                 // {
                 //     name: 'View Total Budget Of Department',
                 //     value: 'VIEW_TOTAL_BUDGET'
@@ -121,9 +121,9 @@ function mainPrompts() {
             // case 'REMOVE_DEPARTMENT':
             //     removeDepartment();
             //     break;
-            // case 'REMOVE_ROLE':
-            //     removeRole();
-            //     break;
+            case 'REMOVE_ROLE':
+                removeRole();
+                break;
             // case 'VIEW_TOTAL_BUDGET':
             //     viewTotalBudget();
             //     break;
@@ -345,28 +345,28 @@ function removeEmployee() {
         })
 }
 
-// function removeRole() {
-//     database.findAllRoles()
-//         .then(([rows]) => {
-//             let roles = rows;
-//             console.log(roles);
-//             const roleChoice = roles.map(({ Title, ID }) => ({
-//                 name: Title,
-//                 value: ID
-//             }))
-//             prompt([
-//                 {
-//                     type: 'list',
-//                     name: 'role',
-//                     message: 'Which role would you like to remove?',
-//                     choices: roleChoice
-//                 }
-//             ]).then((answers) => {
-//                 database.removeRole(answers)
-//                     .then(() => mainPrompts())
-//             })
-//         })
-// }
+function removeRole() {
+    database.findAllRoles()
+        .then(([rows]) => {
+            let roles = rows;
+            console.log(roles);
+            const roleChoice = roles.map(({ Title, ID }) => ({
+                name: Title,
+                value: ID
+            }))
+            prompt([
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: 'Which role would you like to remove?',
+                    choices: roleChoice
+                }
+            ]).then((answers) => {
+                database.removeRole(answers)
+                    .then(() => mainPrompts())
+            })
+        })
+}
 
 
 //quit function with ascii art
